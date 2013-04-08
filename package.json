@@ -1,0 +1,40 @@
+{
+  "name": "scarecrow",
+  "description": "Oz authentication plugin",
+  "version": "0.0.0",
+  "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
+  "contributors":[
+  ],
+  "repository": "git://github.com/spumko/scarecrow",
+  "main": "index",
+  "keywords": [
+    "oz",
+    "hapi",
+    "plugin",
+    "authentication",
+    "authorization"
+  ],
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "oz": "0.2.x"
+  },
+  "peerDependencies": {
+    "hapi": "1.x.x"
+  },
+  "devDependencies": {
+    "hapi": "1.x.x",
+    "lab": "0.1.x",
+    "complexity-report": "0.x.x"
+  },
+  "scripts": {
+    "test": "make test-cov"
+  },
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "http://github.com/spumko/scarecrow/raw/master/LICENSE"
+    }
+  ]
+}
