@@ -65,7 +65,8 @@ describe('Scarecrow', function () {
 
                     callback(null, grant, ext);
                 }
-            }
+            },
+            defaultMode: true
         };
 
         var server = new Hapi.Server();
@@ -75,7 +76,7 @@ describe('Scarecrow', function () {
 
             // Add a protected resource
 
-            server.route({ path: '/protected', method: 'GET', config: { auth: 'oz', handler: function () { this.reply('your in!'); } } });
+            server.route({ path: '/protected', method: 'GET', config: { handler: function () { this.reply(this.auth.credentials.user + ' your in!'); } } });
 
             // The app requests an app ticket using Hawk authentication
 
@@ -137,7 +138,7 @@ describe('Scarecrow', function () {
 
                             server.inject(req, function (res) {
 
-                                expect(res.payload).to.equal('your in!');
+                                expect(res.payload).to.equal('john your in!');
                                 done();
                             });
                         });
