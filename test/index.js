@@ -76,7 +76,7 @@ describe('Scarecrow', function () {
 
             // Add a protected resource
 
-            server.route({ path: '/protected', method: 'GET', config: { handler: function () { this.reply(this.auth.credentials.user + ' your in!'); } } });
+            server.route({ path: '/protected', method: 'GET', config: { auth: { entity: 'user' }, handler: function () { this.reply(this.auth.credentials.user + ' your in!'); } } });
 
             // The app requests an app ticket using Hawk authentication
 
