@@ -65,18 +65,21 @@ describe('Scarecrow', function () {
 
                     callback(null, grant, ext);
                 }
-            },
-            defaultMode: true
+            }
         };
 
         var server = new Hapi.Server();
-        server.pack.require('../', options, function (err) {
+        server.pack.require('../', function (err) {
 
             expect(err).to.not.exist;
 
+            // Add strategy
+
+            server.auth.strategy('oz', 'oz', true, options);
+
             // Add a protected resource
 
-            server.route({ path: '/protected', method: 'GET', config: { auth: { entity: 'user' }, handler: function () { this.reply(this.auth.credentials.user + ' your in!'); } } });
+            server.route({ path: '/protected', method: 'GET', config: { auth: { entity: 'user' }, handler: function (request, reply) { reply(request.auth.credentials.user + ' your in!'); } } });
 
             // The app requests an app ticket using Hawk authentication
 
@@ -84,7 +87,7 @@ describe('Scarecrow', function () {
                 method: 'POST',
                 url: 'http://example.com/oz/app',
                 headers: {
-                    authorization: Oz.client.header('http://example.com/oz/app', 'POST', apps['social']).field
+                    authorization: Oz.client.header('http://example.com/oz/app', 'POST', apps.social).field
                 }
             };
 
@@ -94,7 +97,7 @@ describe('Scarecrow', function () {
 
                 var appTicket = res.result;
 
-                Oz.ticket.rsvp(apps['social'], grant, encryptionPassword, {}, function (err, rsvp) {
+                Oz.ticket.rsvp(apps.social, grant, encryptionPassword, {}, function (err, rsvp) {
 
                     expect(err).to.not.exist;
 
