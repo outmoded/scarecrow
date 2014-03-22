@@ -1,7 +1,7 @@
 {
   "name": "scarecrow",
   "description": "Oz authentication plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
   "contributors":[
   ],
@@ -15,7 +15,7 @@
     "authorization"
   ],
   "engines": {
-    "node": "0.10.x"
+    "node": ">=0.10.22"
   },
   "dependencies": {
     "hoek": "1.x.x",
@@ -23,10 +23,10 @@
     "oz": "0.4.x"
   },
   "peerDependencies": {
-    "hapi": "2.x.x"
+    "hapi": ">=2.x.x"
   },
   "devDependencies": {
-    "hapi": "2.x.x",
+    "hapi": "3.x.x",
     "lab": "1.x.x"
   },
   "scripts": {
