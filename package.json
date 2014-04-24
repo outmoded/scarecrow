@@ -1,11 +1,11 @@
 {
   "name": "scarecrow",
   "description": "Oz authentication plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
   "contributors":[
   ],
-  "repository": "git://github.com/spumko/scarecrow",
+  "repository": "git://github.com/hueniverse/scarecrow",
   "main": "index",
   "keywords": [
     "oz",
@@ -35,7 +35,7 @@
   "licenses": [
     {
       "type": "BSD",
-      "url": "http://github.com/spumko/scarecrow/raw/master/LICENSE"
+      "url": "http://github.com/hueniverse/scarecrow/raw/master/LICENSE"
     }
   ]
 }
