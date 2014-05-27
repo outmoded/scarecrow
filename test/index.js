@@ -69,7 +69,7 @@ describe('Scarecrow', function () {
         };
 
         var server = new Hapi.Server();
-        server.pack.require('../', function (err) {
+        server.pack.register(require('../'), function (err) {
 
             expect(err).to.not.exist;
 
