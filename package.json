@@ -1,7 +1,7 @@
 {
   "name": "scarecrow",
   "description": "Oz authentication plugin",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "Eran Hammer <eran@hammer.io> (http://hueniverse.com)",
   "contributors":[
   ],
