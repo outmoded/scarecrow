@@ -89,7 +89,9 @@ describe('Scarecrow', function () {
                   entity: 'user'
                 },
                 handler: function (request, reply) {
-                  reply(request.auth.credentials.user + ' your in!');
+
+                    reply(request.auth.credentials.user + ' your in!');
+
                 }
               }
             });
@@ -219,7 +221,9 @@ describe('Scarecrow', function () {
                   entity: 'user'
                 },
                 handler: function (request, reply) {
-                  reply(request.auth.credentials.user + ' your in!');
+
+                    reply(request.auth.credentials.user + ' your in!');
+
                 }
               }
             });
