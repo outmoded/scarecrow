@@ -81,7 +81,18 @@ describe('Scarecrow', function () {
 
             // Add a protected resource
 
-            server.route({ path: '/protected', method: 'GET', config: { auth: { entity: 'user' }, handler: function (request, reply) { reply(request.auth.credentials.user + ' your in!'); } } });
+            server.route({
+              path: '/protected',
+              method: 'GET',
+              config: {
+                auth: {
+                  entity: 'user'
+                },
+                handler: function (request, reply) {
+                  reply(request.auth.credentials.user + ' your in!');
+                }
+              }
+            });
 
             // The app requests an app ticket using Hawk authentication
 
@@ -200,7 +211,18 @@ describe('Scarecrow', function () {
 
             // Add a protected resource
 
-            server.route({ path: '/protected', method: 'GET', config: { auth: { entity: 'user' }, handler: function (request, reply) { reply(request.auth.credentials.user + ' your in!'); } } });
+            server.route({
+              path: '/protected',
+              method: 'GET',
+              config: {
+                auth: {
+                  entity: 'user'
+                },
+                handler: function (request, reply) {
+                  reply(request.auth.credentials.user + ' your in!');
+                }
+              }
+            });
 
             // The app requests an app ticket using Hawk authentication
 
