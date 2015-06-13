@@ -1,9 +1,9 @@
 {
   "name": "scarecrow",
   "description": "Oz authentication plugin",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "repository": "git://github.com/hueniverse/scarecrow",
-  "main": "index",
+  "main": "lib/index.js",
   "keywords": [
     "oz",
     "hapi",
@@ -17,10 +17,10 @@
   "dependencies": {
     "hoek": "2.x.x",
     "boom": "2.x.x",
-    "oz": "0.4.x"
+    "oz": "0.5.x"
   },
   "peerDependencies": {
-    "hapi": ">=8.x.x"
+    "hapi": ">=0.10.32"
   },
   "devDependencies": {
     "code": "1.x.x",
@@ -28,12 +28,8 @@
     "lab": "5.x.x"
   },
   "scripts": {
-    "test": "make test-cov"
+    "test": "lab -a code -t 100 -L",
+    "test-cov-html": "lab -a code -r html -o coverage.html"
   },
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "http://github.com/hueniverse/scarecrow/raw/master/LICENSE"
-    }
-  ]
+  "license": "BSD-3-Clause"
 }
