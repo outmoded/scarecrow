@@ -250,7 +250,7 @@ describe('Scarecrow', function () {
                         server.inject(req, function (res) {
 
                             expect(res.statusCode).to.equal(401);
-                            expect(res.result.message).to.equal('Error: Mismatching application id');
+                            expect(res.result.message).to.equal('Mismatching application id');
                             done();
                         });
                     });
