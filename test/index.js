@@ -4,6 +4,7 @@ var Code = require('code');
 var Hapi = require('hapi');
 var Lab = require('lab');
 var Oz = require('oz');
+var Scarecrow = require('../');
 
 
 // Declare internals
@@ -71,7 +72,7 @@ describe('Scarecrow', function () {
         var server = new Hapi.Server();
         server.connection();
 
-        server.register(require('../'), function (err) {
+        server.register(Scarecrow, function (err) {
 
             expect(err).to.not.exist();
 
@@ -105,11 +106,11 @@ describe('Scarecrow', function () {
                 }
             };
 
-            server.inject(req, function (res) {
+            server.inject(req, function (res1) {
 
                 // The user is redirected to the server, logs in, and grant app access, resulting in an rsvp
 
-                var appTicket = res.result;
+                var appTicket = res1.result;
 
                 Oz.ticket.rsvp(apps.social, grant, encryptionPassword, {}, function (err, rsvp) {
 
@@ -118,7 +119,7 @@ describe('Scarecrow', function () {
                     // After granting app access, the user returns to the app with the rsvp
                     // The app exchanges the rsvp for a ticket
 
-                    var req = {
+                    req = {
                         method: 'POST',
                         url: 'http://example.com/oz/rsvp',
                         headers: {
@@ -127,13 +128,13 @@ describe('Scarecrow', function () {
                         payload: JSON.stringify({ rsvp: rsvp })
                     };
 
-                    server.inject(req, function (res) {
+                    server.inject(req, function (res2) {
 
-                        var userTicket = res.result;
+                        var userTicket = res2.result;
 
                         // The app reissues the ticket
 
-                        var req = {
+                        req = {
                             method: 'POST',
                             url: 'http://example.com/oz/reissue',
                             headers: {
@@ -141,11 +142,11 @@ describe('Scarecrow', function () {
                             }
                         };
 
-                        server.inject(req, function (res) {
+                        server.inject(req, function (res3) {
 
-                            var newTicket = res.result;
+                            var newTicket = res3.result;
 
-                            var req = {
+                            req = {
                                 method: 'GET',
                                 url: 'http://example.com/protected',
                                 headers: {
@@ -153,9 +154,9 @@ describe('Scarecrow', function () {
                                 }
                             };
 
-                            server.inject(req, function (res) {
+                            server.inject(req, function (res4) {
 
-                                expect(res.payload).to.equal('john your in!');
+                                expect(res4.payload).to.equal('john your in!');
                                 done();
                             });
                         });
@@ -202,7 +203,7 @@ describe('Scarecrow', function () {
         var server = new Hapi.Server();
         server.connection();
 
-        server.register(require('../'), function (err) {
+        server.register(Scarecrow, function (err) {
 
             expect(err).to.not.exist();
 
@@ -236,11 +237,11 @@ describe('Scarecrow', function () {
                 }
             };
 
-            server.inject(req, function (res) {
+            server.inject(req, function (res1) {
 
                 // The user is redirected to the server, logs in, and grant app access, resulting in an rsvp
 
-                var appTicket = res.result;
+                var appTicket = res1.result;
 
                 Oz.ticket.rsvp(app, grant, encryptionPassword, {}, function (err, rsvp) {
 
@@ -249,7 +250,7 @@ describe('Scarecrow', function () {
                     // After granting app access, the user returns to the app with the rsvp
                     // The app exchanges the rsvp for a ticket
 
-                    var req = {
+                    req = {
                         method: 'POST',
                         url: 'http://example.com/oz/rsvp',
                         headers: {
@@ -258,12 +259,12 @@ describe('Scarecrow', function () {
                         payload: JSON.stringify({ rsvp: rsvp })
                     };
 
-                    server.inject(req, function (res) {
+                    server.inject(req, function (res2) {
 
-                        var userTicket = res.result;
+                        var userTicket = res2.result;
                         userTicket.app = '567';
 
-                        var req = {
+                        req = {
                             method: 'GET',
                             url: 'http://example.com/protected',
                             headers: {
@@ -271,10 +272,10 @@ describe('Scarecrow', function () {
                             }
                         };
 
-                        server.inject(req, function (res) {
+                        server.inject(req, function (res3) {
 
-                            expect(res.statusCode).to.equal(401);
-                            expect(res.result.message).to.equal('Mismatching application id');
+                            expect(res3.statusCode).to.equal(401);
+                            expect(res3.result.message).to.equal('Mismatching application id');
                             done();
                         });
                     });
