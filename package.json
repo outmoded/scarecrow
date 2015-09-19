@@ -1,8 +1,8 @@
 {
     "name": "scarecrow",
     "description": "Oz authentication plugin",
-    "version": "1.0.0",
-    "repository": "git://github.com/hueniverse/scarecrow",
+    "version": "1.0.1",
+    "repository": "git://github.com/hapijs/scarecrow",
     "main": "lib/index.js",
     "keywords": [
         "oz",
