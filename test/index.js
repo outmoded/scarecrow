@@ -1,32 +1,34 @@
+'use strict';
+
 // Load modules
 
-var Code = require('code');
-var Hapi = require('hapi');
-var Lab = require('lab');
-var Oz = require('oz');
-var Scarecrow = require('../');
+const Code = require('code');
+const Hapi = require('hapi');
+const Lab = require('lab');
+const Oz = require('oz');
+const Scarecrow = require('../');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.describe;
-var it = lab.it;
-var expect = Code.expect;
+const lab = exports.lab = Lab.script();
+const describe = lab.describe;
+const it = lab.it;
+const expect = Code.expect;
 
 
-describe('Scarecrow', function () {
+describe('Scarecrow', () => {
 
-    it('performs a full authorization flow', function (done) {
+    it('performs a full authorization flow', (done) => {
 
-        var encryptionPassword = 'password';
+        const encryptionPassword = 'password';
 
-        var apps = {
+        const apps = {
             social: {
                 id: 'social',
                 scope: ['a', 'b', 'c'],
@@ -41,14 +43,14 @@ describe('Scarecrow', function () {
             }
         };
 
-        var grant = {
+        const grant = {
             id: 'a1b2c3d4e5f6g7h8i9j0',
             app: 'social',
             user: 'john',
             exp: Oz.hawk.utils.now() + 60000
         };
 
-        var options = {
+        const options = {
             oz: {
                 encryptionPassword: encryptionPassword,
 
@@ -59,7 +61,7 @@ describe('Scarecrow', function () {
 
                 loadGrantFunc: function (id, callback) {
 
-                    var ext = {
+                    const ext = {
                         public: 'everybody knows',
                         private: 'the the dice are loaded'
                     };
@@ -69,10 +71,10 @@ describe('Scarecrow', function () {
             }
         };
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection();
 
-        server.register(Scarecrow, function (err) {
+        server.register(Scarecrow, (err) => {
 
             expect(err).to.not.exist();
 
@@ -98,7 +100,7 @@ describe('Scarecrow', function () {
 
             // The app requests an app ticket using Hawk authentication
 
-            var req = {
+            let req = {
                 method: 'POST',
                 url: 'http://example.com/oz/app',
                 headers: {
@@ -106,13 +108,13 @@ describe('Scarecrow', function () {
                 }
             };
 
-            server.inject(req, function (res1) {
+            server.inject(req, (res1) => {
 
                 // The user is redirected to the server, logs in, and grant app access, resulting in an rsvp
 
-                var appTicket = res1.result;
+                const appTicket = res1.result;
 
-                Oz.ticket.rsvp(apps.social, grant, encryptionPassword, {}, function (err, rsvp) {
+                Oz.ticket.rsvp(apps.social, grant, encryptionPassword, {}, (err, rsvp) => {
 
                     expect(err).to.not.exist();
 
@@ -128,9 +130,9 @@ describe('Scarecrow', function () {
                         payload: JSON.stringify({ rsvp: rsvp })
                     };
 
-                    server.inject(req, function (res2) {
+                    server.inject(req, (res2) => {
 
-                        var userTicket = res2.result;
+                        const userTicket = res2.result;
 
                         // The app reissues the ticket
 
@@ -142,9 +144,9 @@ describe('Scarecrow', function () {
                             }
                         };
 
-                        server.inject(req, function (res3) {
+                        server.inject(req, (res3) => {
 
-                            var newTicket = res3.result;
+                            const newTicket = res3.result;
 
                             req = {
                                 method: 'GET',
@@ -154,7 +156,7 @@ describe('Scarecrow', function () {
                                 }
                             };
 
-                            server.inject(req, function (res4) {
+                            server.inject(req, (res4) => {
 
                                 expect(res4.payload).to.equal('john your in!');
                                 done();
@@ -166,25 +168,25 @@ describe('Scarecrow', function () {
         });
     });
 
-    it('fails to authenticate a request with mismatching app id', function (done) {
+    it('fails to authenticate a request with mismatching app id', (done) => {
 
-        var encryptionPassword = 'password';
+        const encryptionPassword = 'password';
 
-        var app = {
+        const app = {
             id: 'social',
             scope: ['a', 'b', 'c'],
             key: 'werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn',
             algorithm: 'sha256'
         };
 
-        var grant = {
+        const grant = {
             id: 'a1b2c3d4e5f6g7h8i9j0',
             app: 'social',
             user: 'john',
             exp: Oz.hawk.utils.now() + 60000
         };
 
-        var options = {
+        const options = {
             oz: {
                 encryptionPassword: encryptionPassword,
 
@@ -200,10 +202,10 @@ describe('Scarecrow', function () {
             }
         };
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection();
 
-        server.register(Scarecrow, function (err) {
+        server.register(Scarecrow, (err) => {
 
             expect(err).to.not.exist();
 
@@ -229,7 +231,7 @@ describe('Scarecrow', function () {
 
             // The app requests an app ticket using Hawk authentication
 
-            var req = {
+            let req = {
                 method: 'POST',
                 url: 'http://example.com/oz/app',
                 headers: {
@@ -237,13 +239,13 @@ describe('Scarecrow', function () {
                 }
             };
 
-            server.inject(req, function (res1) {
+            server.inject(req, (res1) => {
 
                 // The user is redirected to the server, logs in, and grant app access, resulting in an rsvp
 
-                var appTicket = res1.result;
+                const appTicket = res1.result;
 
-                Oz.ticket.rsvp(app, grant, encryptionPassword, {}, function (err, rsvp) {
+                Oz.ticket.rsvp(app, grant, encryptionPassword, {}, (err, rsvp) => {
 
                     expect(err).to.not.exist();
 
@@ -259,9 +261,9 @@ describe('Scarecrow', function () {
                         payload: JSON.stringify({ rsvp: rsvp })
                     };
 
-                    server.inject(req, function (res2) {
+                    server.inject(req, (res2) => {
 
-                        var userTicket = res2.result;
+                        const userTicket = res2.result;
                         userTicket.app = '567';
 
                         req = {
@@ -272,7 +274,7 @@ describe('Scarecrow', function () {
                             }
                         };
 
-                        server.inject(req, function (res3) {
+                        server.inject(req, (res3) => {
 
                             expect(res3.statusCode).to.equal(401);
                             expect(res3.result.message).to.equal('Mismatching application id');
