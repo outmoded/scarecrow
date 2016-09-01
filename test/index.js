@@ -52,7 +52,7 @@ describe('Scarecrow', () => {
 
         const options = {
             oz: {
-                encryptionPassword: encryptionPassword,
+                encryptionPassword,
 
                 loadAppFunc: function (id, callback) {
 
@@ -127,7 +127,7 @@ describe('Scarecrow', () => {
                         headers: {
                             authorization: Oz.client.header('http://example.com/oz/rsvp', 'POST', appTicket).field
                         },
-                        payload: JSON.stringify({ rsvp: rsvp })
+                        payload: JSON.stringify({ rsvp })
                     };
 
                     server.inject(req, (res2) => {
@@ -188,7 +188,7 @@ describe('Scarecrow', () => {
 
         const options = {
             oz: {
-                encryptionPassword: encryptionPassword,
+                encryptionPassword,
 
                 loadAppFunc: function (id, callback) {
 
@@ -258,7 +258,7 @@ describe('Scarecrow', () => {
                         headers: {
                             authorization: Oz.client.header('http://example.com/oz/rsvp', 'POST', appTicket).field
                         },
-                        payload: JSON.stringify({ rsvp: rsvp })
+                        payload: JSON.stringify({ rsvp })
                     };
 
                     server.inject(req, (res2) => {
