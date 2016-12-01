@@ -1,7 +1,7 @@
 {
     "name": "scarecrow",
     "description": "Oz authentication plugin",
-    "version": "3.0.3",
+    "version": "3.0.4",
     "repository": "git://github.com/hapijs/scarecrow",
     "main": "lib/index.js",
     "keywords": [
@@ -19,11 +19,11 @@
         "oz": "4.x.x"
     },
     "peerDependencies": {
-        "hapi": ">=10.0.0"
+        "hapi": ">=13.0.0"
     },
     "devDependencies": {
-        "code": "3.x.x",
-        "hapi": "15.x.x",
+        "code": "4.x.x",
+        "hapi": "16.x.x",
         "lab": "11.x.x"
     },
     "scripts": {
