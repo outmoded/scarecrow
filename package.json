@@ -11,20 +11,14 @@
         "authentication",
         "authorization"
     ],
-    "engines": {
-        "node": ">=8.9.0"
-    },
     "dependencies": {
-        "hoek": "5.x.x",
+        "hoek": "6.x.x",
         "oz": "5.x.x"
-    },
-    "peerDependencies": {
-        "hapi": "17.x.x"
     },
     "devDependencies": {
         "code": "5.x.x",
         "hapi": "17.x.x",
-        "lab": "15.x.x"
+        "lab": "17.x.x"
     },
     "scripts": {
         "test": "lab -a code -t 100 -L",

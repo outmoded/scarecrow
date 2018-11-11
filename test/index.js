@@ -1,7 +1,5 @@
 'use strict';
 
-// Load modules
-
 const Code = require('code');
 const Hapi = require('hapi');
 const Lab = require('lab');
@@ -9,12 +7,8 @@ const Oz = require('oz');
 const Scarecrow = require('../');
 
 
-// Declare internals
-
 const internals = {};
 
-
-// Test shortcuts
 
 const { describe, it } = exports.lab = Lab.script();
 const expect = Code.expect;
